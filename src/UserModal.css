@@ -1,0 +1,63 @@
+/* General styling for the user info (icon + name) */
+.user-info {
+    cursor: pointer;
+    color: #333;
+    display: flex; /* Aligns icon and name horizontally */
+    align-items: center; /* Centers vertically */
+    min-width: 8ch; /* Minimum width to fit 8 characters */
+}
+
+/* Popup window styling */
+.user-popup {
+    position: absolute;
+    top: 100%; /* Position directly below the user-info */
+    left: 0; /* Align to the left edge of the user-info */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 110px; /* Minimum width to fit 8 characters */
+    max-width: 200px; /* Set a maximum width if needed */
+    z-index: 1000;
+    padding: 0.5rem; /* Padding inside the popup */
+    margin-top: 0.5rem; /* Space between user-info and popup */
+    margin-right: 5px; /* Add margin to the right to keep it away from the edge */
+}
+
+/* List items styling */
+.user-popup ul {
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.user-popup ul li {
+    padding: 0; /* Remove padding from list items */
+    margin: 0; /* Remove margin from list items */
+}
+
+/* Button and links styling */
+.user-popup ul li a,
+.user-popup ul li button {
+    display: block; /* Makes links and buttons block elements */
+    padding: 0.3rem 0.75rem; /* Reduce padding for a more compact look */
+    color: #000; /* Text color */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 14px; /* Adjust font size */
+    min-width: 8px; /* Minimum width to fit 8 characters */
+}
+
+.user-popup ul li a:hover {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+.user-popup ul li button {
+    color: #fff;
+    background-color: #dc3545;
+    border: none; /* Remove default button border */
+    border-radius: 4px;
+    font-size: 14px; /* Adjust font size */
+}
+
+.user-popup ul li button:hover {
+    background-color: #c82333;
+}

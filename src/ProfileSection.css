@@ -1,0 +1,22 @@
+/* ProfileSection.css */
+
+/* Apply grey background color to the entire body when ProfileSection is active */
+.profile-section-body {
+    background-color: #f8f9fa; /* Light grey background color */
+    min-height: 100vh; /* Ensure it covers the entire viewport height */
+    padding: 2rem; /* Add padding inside the section */
+  }
+  
+  /* Style for the card within ProfileSection */
+  .profile-section .card {
+    border: 1px solid #ddd; /* Light border for the card */
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #ffffff; /* White background for the card */
+  }
+  
+  /* Style for card body */
+  .profile-section .card-body {
+    padding: 2rem; /* Extra padding inside the card body */
+  }
+  
