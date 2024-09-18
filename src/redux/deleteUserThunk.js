@@ -1,7 +1,7 @@
 import { deleteUserStart, deleteUserSuccess, deleteUserFailure } from './authSlice';
 import { deleteAllBooks } from './booksSlice'; // Adjust the path as needed
 
-const host = "http://localhost:4000";
+const host = "https://vercel.com/%E2%80%A6himali1423s-projects/shelflyst-backend-vercel";
 
 export const deleteUser = () => async (dispatch) => {
   dispatch(deleteUserStart());
