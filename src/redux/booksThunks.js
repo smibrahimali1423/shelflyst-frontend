@@ -1,6 +1,6 @@
 import { fetchBooksStart, fetchBooksSuccess, fetchBooksFailure, addBook as addBookAction, deleteBook as deleteBookAction, clearBooks} from './booksSlice';
 
-const host = "http://localhost:4000"; // Use const to declare the host variable
+const host = "https://vercel.com/%E2%80%A6himali1423s-projects/shelflyst-backend-vercel"; // Use const to declare the host variable
 
 export const fetchBooks = () => async (dispatch) => {
   dispatch(fetchBooksStart());
