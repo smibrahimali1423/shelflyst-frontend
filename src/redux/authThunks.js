@@ -1,5 +1,5 @@
 import { loginStart, loginSuccess, loginFailure } from './authSlice';
-const host = "http://localhost:4000";
+const host = "https://vercel.com/%E2%80%A6himali1423s-projects/shelflyst-backend-vercel";
 
 export const login = (email, password) => async (dispatch) => {
   dispatch(loginStart());
