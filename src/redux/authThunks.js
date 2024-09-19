@@ -27,8 +27,8 @@ export const login = (email, password) => async (dispatch) => {
         if (userNameResponse.ok) {
           if (userNameFetched && userNameFetched.name) {
             sessionStorage.setItem('userName', userNameFetched.name);
-            localStorage.setItem('email', userNameFetched.email);
-            localStorage.setItem('date', userNameFetched.date);
+            sessionStorage.setItem('email', userNameFetched.email);
+            sessionStorage.setItem('date', userNameFetched.date);
           } else {
             dispatch(loginFailure('User name not available'));
           }
