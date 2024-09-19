@@ -22,6 +22,11 @@ function Login() {
     document.title = "Shelflyst";
 
   })
+
+    useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, []);
+
   
   const handleSubmit = async (e) => {
     e.preventDefault();
