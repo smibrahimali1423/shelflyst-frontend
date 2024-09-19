@@ -31,6 +31,9 @@ export const signup = (name, email, password) => async (dispatch) => {
             // Store the user's name in sessionStorage
             console.log('Before saving userName in signup:', userNameFetched.name);
             sessionStorage.setItem('userName', userNameFetched.name);
+            sessionStorage.setItem('email', userNameFetched.email);
+            sessionStorage.setItem('date', userNameFetched.date);
+
 
             console.log('After saving userName in signup:', sessionStorage.getItem('userName'));
           } else {
