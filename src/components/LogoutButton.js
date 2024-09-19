@@ -4,8 +4,8 @@ function LogoutButton() {
     const handleLogoutClick = () => {
         localStorage.removeItem('token');
         sessionStorage.removeItem('userName');
-        localStorage.removeItem('email');
-        localStorage.removeItem('date');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('date');
         window.location.href = '/';
       };
 
