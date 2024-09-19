@@ -1,6 +1,6 @@
 import { fetchBooksStart, fetchBooksSuccess, fetchBooksFailure, addBook as addBookAction, deleteBook as deleteBookAction, clearBooks} from './booksSlice';
 
-const host = "http://localhost:4000"
+const host = "https://shelflyst-backend-2.onrender.com"
 export const fetchBooks = () => async (dispatch) => {
   dispatch(fetchBooksStart());
   try {
