@@ -20,40 +20,40 @@ function BookSearch() {
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
+const fetchBooks = async (newPage = 0) => {
+    if (!searchTerm.trim()) return;
 
-    const fetchBooks = async (newPage = 0) => {
-        dispatch(clearBooks);
-        if (!searchTerm.trim()) return;
+    if (newPage === 0) {
+        dispatch(searchStart());
+    } else {
+        setIsFetchingMore(true);
+    }
 
-        if (newPage === 0) {
-            dispatch(searchStart());
-        } else {
-            setIsFetchingMore(true);
+    try {
+        const maxResults = 40; // Fetch 40 results at a time
+        const startIndex = newPage * maxResults; // Calculate the start index based on the page number
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&startIndex=${startIndex}&maxResults=${maxResults}`);
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
 
-        try {
-            const maxResults = 40; // Fetch 40 results at a time
-            const startIndex = newPage * maxResults; // Calculate the start index based on the page number
-            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&startIndex=${startIndex}&maxResults=${maxResults}`);
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+        const data = await response.json();
+        const newBooks = newPage === 0 ? data.items || [] : [...books, ...(data.items || [])];
+        
+        dispatch(searchSuccess(newBooks)); // Update the state with the new books
+    } catch (err) {
+        dispatch(searchFailure('Failed to fetch books'));
+    } finally {
+        setIsFetchingMore(false);
+    }
+};
 
-            const data = await response.json();
-            dispatch(searchSuccess([...books, ...(data.items || [])])); // Append new books to existing ones
-        } catch (err) {
-            dispatch(searchFailure('Failed to fetch books'));
-        } finally {
-            setIsFetchingMore(false);
-        }
-    };
-
-    const handleSearch = () => {
-        setPage(0); // Reset to page 0 on new search
-        dispatch(searchSuccess([])); // Clear previous results
-        fetchBooks(0); // Fetch first set of results
-    };
+const handleSearch = () => {
+    setPage(0); // Reset to page 0 on new search
+    dispatch(searchSuccess([])); // Clear previous results
+    fetchBooks(0); // Fetch first set of results
+};
 
     const handleAddClick = (book) => {
         const bookData = {
