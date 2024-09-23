@@ -22,6 +22,7 @@ function BookSearch() {
     };
 
     const fetchBooks = async (newPage = 0) => {
+        dispatch(clearBooks);
         if (!searchTerm.trim()) return;
 
         if (newPage === 0) {
