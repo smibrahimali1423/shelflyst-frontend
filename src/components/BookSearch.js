@@ -20,7 +20,7 @@ function BookSearch() {
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
-    const API_KEY = AIzaSyBeTynBcOjbpY0GCB_i_G-YtwixeQfrNak;
+    const API_KEY = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
 
 const fetchBooks = async (newPage = 0) => {
     if (!searchTerm.trim()) return;
@@ -34,7 +34,7 @@ const fetchBooks = async (newPage = 0) => {
     try {
         const maxResults = 40; // Fetch 40 results at a time
         const startIndex = newPage * maxResults; // Calculate the start index based on the page number
-        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&startIndex=${startIndex}&maxResults=${maxResults}&key=AIzaSyBeTynBcOjbpY0GCB_i_G-YtwixeQfrNak`);
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&startIndex=${startIndex}&maxResults=${maxResults}&key=${API_KEY}`);
         
         if (!response.ok) {
             throw new Error('Network response was not ok');
