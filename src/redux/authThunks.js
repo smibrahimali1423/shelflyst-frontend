@@ -1,5 +1,5 @@
 import { loginStart, loginSuccess, loginFailure } from './authSlice';
-const host = "http://localhost:4000"
+const host = "https://shelflyst-backend-2.onrender.com" 
 export const login = (email, password) => async (dispatch) => {
   dispatch(loginStart());
   try {
