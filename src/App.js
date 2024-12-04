@@ -10,6 +10,7 @@ import BookDetails from './components/BookDetails';
 import ProfileSection from './components/ProfileSection';
 import Settings from './components/Settings';
 import Navbar from './components/Navbar';
+import SharedBooks from './components/SharedBooks';
 
 // ProtectedRoute component to handle authentication
 const ProtectedRoute = ({ element }) => {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/book-details" element={<ProtectedRoute element={<BookDetails />} />} />
         <Route path="/profile" element={<ProtectedRoute element={<ProfileSection />} />} />
         <Route path="/settings" element={<ProtectedRoute element={<Settings />} />} />
+        <Route path="/sharedbooks"  element={<ProtectedRoute element={<SharedBooks />} />}/>
       </Routes>
     </Router>
   );
