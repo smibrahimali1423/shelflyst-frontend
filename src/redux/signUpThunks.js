@@ -1,5 +1,6 @@
 import { signupStart, signupSuccess, signupFailure } from './authSlice';
-const host = "https://shelflyst-backend-2.onrender.com"
+const host = "https://shelflyst-backend-2.onrender.com" 
+
 export const signup = (name, email, password) => async (dispatch) => {
   dispatch(signupStart());
   try {
