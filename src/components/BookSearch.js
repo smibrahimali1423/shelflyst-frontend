@@ -20,7 +20,7 @@ function BookSearch() {
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
-    const API_KEY = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
+    const API_KEY = AIzaSyBeTynBcOjbpY0GCB_i_G-YtwixeQfrNak;
 
 const fetchBooks = async (newPage = 0) => {
     if (!searchTerm.trim()) return;
