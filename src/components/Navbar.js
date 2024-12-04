@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AddBooks from './AddBooks';
 import UserModal from './UserModal';
+import SharedBooks from './SharedBooks'; // Import SharedBooks
 
 function Navbar() {
     const navigate = useNavigate();
@@ -14,8 +15,8 @@ function Navbar() {
     // Determine if the current route is the booklist route
     const isHomeDisabled = location.pathname === '/booklist';
     const isAboutDisabled = location.pathname === '/about';
-
-    // Determine if the current route is the booksearch route
+    const isSharedBooksDisabled = location.pathname === '/sharedbooks'; // New route check for SharedBooks
+    const isRecommendationsDisabled = location.pathname === '/recommendations'; // Add this line to define isRecommendationsDisabled
     const isBookSearchPage = location.pathname === '/booksearch';
 
     return (
@@ -45,7 +46,6 @@ function Navbar() {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        {/* Apply disabled class if on /about page */}
                         <Link
                             className={`nav-link ${isAboutDisabled ? 'disabled' : ''}`}
                             to="/about"
@@ -54,6 +54,17 @@ function Navbar() {
                             About
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        {/* Apply disabled class if on /sharedbooks page */}
+                        <Link
+                            className={`nav-link ${isSharedBooksDisabled ? 'disabled' : ''}`}
+                            to="/sharedbooks"
+                            aria-disabled={isSharedBooksDisabled} // Add aria-disabled for accessibility
+                        >
+                            Shared Books
+                        </Link>
+                    </li>
+                    
                 </ul>
 
                 {/* Conditionally render the AddBooks component */}
