@@ -1,6 +1,6 @@
 import { fetchSharedBooksStart, fetchSharedBooksSuccess, fetchSharedBooksFailure, shareBook, clearSharedBooks } from './sharedBooksSlice';
 
-const host = "http://localhost:4000"; // Change this to your server's base URL
+const host = "https://shelflyst-backend-2.onrender.com"  
 
 // Fetch all shared books
 export const fetchSharedBooks = () => async (dispatch) => {
