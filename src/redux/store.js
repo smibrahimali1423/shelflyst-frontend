@@ -4,6 +4,7 @@ import authReducer from './authSlice';
 import booksReducer from './booksSlice';
 import signupReducer from './signUpSlice';
 import searchReducer from './searchSlice'; // Import the new slice
+import sharedBooksReducer from './sharedBooksSlice'
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     books: booksReducer,
     signup: signupReducer,
     search: searchReducer, // Add it to the store
+    sharedBooks: sharedBooksReducer,
   },
 });
 

@@ -4,7 +4,7 @@ const initialState = {
   books: [],
   loading: false,
   error: null,
-  bookCount: 0, // Initialize bookCount
+  bookCount: 0,
 };
 
 const booksSlice = createSlice({
@@ -16,7 +16,7 @@ const booksSlice = createSlice({
     },
     fetchBooksSuccess: (state, action) => {
       state.books = action.payload;
-      state.bookCount = action.payload.length; // Update bookCount based on fetched books
+      state.bookCount = action.payload.length;
       state.loading = false;
     },
     fetchBooksFailure: (state, action) => {
@@ -25,21 +25,26 @@ const booksSlice = createSlice({
     },
     addBook: (state, action) => {
       state.books.push(action.payload);
-      state.bookCount = state.books.length; // Increment bookCount
+      state.bookCount = state.books.length;
     },
     deleteBook: (state, action) => {
       state.books = state.books.filter((book) => book.id !== action.payload);
-      state.bookCount = state.books.length; // Update bookCount after deletion
+      state.bookCount = state.books.length;
     },
     clearBooks: (state) => {
       state.books = [];
-      state.bookCount = 0; // Reset bookCount
+      state.bookCount = 0;
     },
-
-    
   },
 });
 
-export const { fetchBooksStart, fetchBooksSuccess, fetchBooksFailure, addBook, deleteBook, clearBooks } = booksSlice.actions;
+export const { 
+  fetchBooksStart, 
+  fetchBooksSuccess, 
+  fetchBooksFailure, 
+  addBook, 
+  deleteBook, 
+  clearBooks 
+} = booksSlice.actions;
 
 export default booksSlice.reducer;
