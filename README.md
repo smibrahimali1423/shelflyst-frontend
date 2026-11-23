@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Shelflyst
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Live:** <https://shelflyst-frontend.vercel.app>
 
-## Available Scripts
+Shelflyst is a personal book-collection app. You sign up, search for books, add them to your own
+shelf, and see what other readers have shared on a community shelf.
 
-In the project directory, you can run:
+This repository is the React frontend. The REST API lives in
+[shelflyst-backend](https://github.com/smibrahimali1423/shelflyst-backend).
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Sign up and log in with JWT authentication; protected pages send signed-out users back to login
+- Search books through the Google Books API and open a details page for each result
+- Add and remove books on your own shelf, or clear it
+- A shared-books feed of books other users have added to the community shelf
+- Profile and settings pages, including account deletion
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech
 
-### `npm test`
+| Area | Used |
+|---|---|
+| UI | React 18, React Router 6, Bootstrap 5 |
+| State | Redux Toolkit (slices and thunks for auth, books, search, shared books) |
+| Data | Google Books API; Shelflyst REST API (Express, MongoDB) |
+| Tests | Jest and React Testing Library |
+| Hosting | Vercel |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project layout
 
-### `npm run build`
+```
+src/
+  App.js              routes and the protected-route wrapper
+  components/         pages and UI pieces (Login, Signup, BookSearch, BookItemList, SharedBooks, ...)
+  redux/              store, slices and thunks that call the API
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Requires Node 18 or later.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+echo "REACT_APP_GOOGLE_BOOKS_API_KEY=your-key" > .env.local
+npm start
+```
 
-### `npm run eject`
+The app opens on <http://localhost:3000> and talks to the deployed API. Get a Google Books key
+from the Google Cloud console (APIs & Services → Credentials).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm test
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The tests check that the login page renders, that protected pages redirect signed-out users to
+login, and that the auth reducer handles login, failure and logout.
