@@ -434,3 +434,24 @@ body {
     font-size: 1.4rem;
   }
 }
+
+/* Menu button: draw our own icon so external stylesheets can't hide it */
+.app-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 38px;
+  padding: 0;
+  font-size: 1.2rem;
+  color: #1b2333;
+  border: 1px solid var(--shelf-border);
+  border-radius: 8px;
+  background: #fff;
+  margin-left: auto;
+}
+@media (max-width: 991.98px) {
+  .app-menu-toggle {
+    display: inline-flex !important;
+  }
+}

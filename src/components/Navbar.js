@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import AddBooks from './AddBooks';
 import UserModal from './UserModal';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 function Navbar() {
     const navigate = useNavigate();
@@ -30,14 +31,14 @@ function Navbar() {
             </Link>
 
             <button
-                className="navbar-toggler"
+                className="navbar-toggler app-menu-toggle"
                 type="button"
                 aria-controls="navbarSupportedContent"
                 aria-expanded={menuOpen}
                 aria-label="Toggle navigation"
                 onClick={() => setMenuOpen((open) => !open)}
             >
-                <span className="navbar-toggler-icon"></span>
+                {menuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
             </button>
 
             <div className={`collapse navbar-collapse ${menuOpen ? 'show' : ''}`} id="navbarSupportedContent">
