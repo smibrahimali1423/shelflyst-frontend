@@ -116,6 +116,8 @@ const handleSearch = () => {
             fetchBooks(page); // Fetch more books when the user reaches the end
             document.title = "Shelflyst - Search";
         }
+        // Only re-run when the page number changes; fetchBooks is recreated on every render.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     return (

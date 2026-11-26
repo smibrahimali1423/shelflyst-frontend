@@ -61,9 +61,6 @@ export const deleteBook = (bookId) => async (dispatch) => {
       throw new Error('Failed to delete book.');
     }
 
-    // Assuming the backend responds with the deleted book ID or confirmation
-    const deletedBook = await deleteBookResponse.json();
-    
     // Dispatch the action to remove the book from the Redux store
     dispatch(deleteBookAction(bookId));
   } catch (error) {
