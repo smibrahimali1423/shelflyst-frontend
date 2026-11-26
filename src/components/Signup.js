@@ -44,18 +44,16 @@ function Signup() {
     const handleCloseTerms = () => setShowTermsModal(false);
 
     return (
-        <section className="vh-100 bg-light d-flex align-items-center justify-content-center" style={{ overflow: 'hidden' }}>
+        <section className="auth-page">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-8 col-xl-6">
                         <div className="card shadow-sm rounded">
                             <div className="card-body p-4">
                                 <div className="text-center">
-                                    <img src={`${process.env.PUBLIC_URL}/images/img1.png`} alt="Logo" 
-                                        style={{ width: '200px', height: '200px' }} 
-                                    />
+                                    <img src={`${process.env.PUBLIC_URL}/images/img1.png`} alt="Logo" className="auth-logo" />
                                 </div>
-                                <h1 className="text-center mb-4 mt-4">Sign up</h1>
+                                <h1 className="text-center mb-4 mt-3 auth-heading">Sign up</h1>
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-3">
                                         <label htmlFor="name" className="form-label">Your Name</label>

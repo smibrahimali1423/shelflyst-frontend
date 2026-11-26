@@ -1,11 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const savedToken = localStorage.getItem('token');
+
 const initialState = {
-  token: localStorage.getItem('token') || null,
+  token: savedToken || null,
   user: null,
   loading: false,
   error: null,
-  isAuthenticated: false,
+  // A saved token means the user was logged in before the page was refreshed.
+  // It is checked against the backend once on startup (see restoreSession).
+  isAuthenticated: !!savedToken,
+  authChecked: !savedToken,
 };
 
 const authSlice = createSlice({
@@ -46,11 +51,21 @@ const authSlice = createSlice({
       state.token = null;
       state.user = null;
       state.isAuthenticated = false;
+      state.authChecked = true;
       localStorage.removeItem('token');
       sessionStorage.removeItem('userName');
+      sessionStorage.removeItem('userId');
     },
     setUser: (state, action) => {
       state.user = action.payload;
+    },
+    sessionRestored: (state, action) => {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+      state.authChecked = true;
+    },
+    sessionCheckFinished: (state) => {
+      state.authChecked = true;
     },
     deleteUserStart: (state) => {
       state.loading = true;
@@ -63,6 +78,7 @@ const authSlice = createSlice({
       state.error = null;
       localStorage.removeItem('token');
       sessionStorage.removeItem('userName');
+      sessionStorage.removeItem('userId');
     },
     deleteUserFailure: (state, action) => {
       state.loading = false;
@@ -74,7 +90,7 @@ const authSlice = createSlice({
 export const { 
   signupStart, signupSuccess, signupFailure, 
   loginStart, loginSuccess, loginFailure, 
-  logout, setUser, 
+  logout, setUser, sessionRestored, sessionCheckFinished,
   deleteUserStart, deleteUserSuccess, deleteUserFailure 
 } = authSlice.actions;
 

@@ -9,9 +9,9 @@ function RemoveButton({ onRemoveClick }) {
     };
     
     return (
-        <div className="card-footer" style={{ background: 'transparent', borderTop: 'none', marginTop: 'auto' }}>
-            <button className="btn btn-danger btn-block mb-3" onClick={handleClick}>
-                <i className="fas fa-minus-circle"></i> Remove
+        <div className="card-footer book-card-footer">
+            <button className="btn btn-outline-danger btn-sm w-100" onClick={handleClick}>
+                <i className="fas fa-minus-circle me-1"></i> Remove
             </button>
         </div>
     );

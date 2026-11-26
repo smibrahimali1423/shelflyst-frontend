@@ -120,23 +120,24 @@ const handleSearch = () => {
 
     return (
         <>
-            <div className="container pt-5 mt-5">
+            <div className="container page-container">
                 <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} onSearch={handleSearch} />
                 {alert && <Alert alert={alert} clearAlert={clearAlert} />} {/* Show alert */}
                 {loading && <p><DotPulse /></p>}
                 {error && <p>Error: {error}</p>}
                 {books.length === 0 && !loading && !error ? (
-                    <div className="text-center">
-                        <h2>Enter a search term to find books!</h2>
+                    <div className="empty-state">
+                        <h4>Search for a book to add</h4>
+                        <p className="text-muted mb-0">Try a title, an author or a topic.</p>
                     </div>
                 ) : (
-                    <div className="d-flex flex-wrap justify-content-around">
+                    <div className="book-grid">
                         {books.map((book, index) => {
                             const isAlreadyAdded = addedBooks.some((addedBook) => addedBook.id === book.id);
                             
                             if (index === books.length - 1) {
                                 return (
-                                    <div ref={lastBookElementRef} key={book.id}>
+                                    <div ref={lastBookElementRef} key={book.id} className="book-grid-item">
                                         <BookItem
                                             title={book.volumeInfo.title}
                                             authors={book.volumeInfo.authors || []}

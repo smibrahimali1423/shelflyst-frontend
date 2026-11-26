@@ -24,7 +24,6 @@ function Login() {
   })
 
     useEffect(() => {
-    window.scrollTo(0, document.body.scrollHeight);
   }, []);
 
   
@@ -34,20 +33,18 @@ function Login() {
   };
 
   return (
-    <section className="h-100" style={{ backgroundColor: '#eee'   }}>
+    <section className="auth-page">
       <div className="container h-100 d-flex justify-content-center align-items-center">
         <div className="row w-100 d-flex justify-content-center align-items-center">
           <div className="col-xl-10">
-            <div className="card rounded-3 text-black h-100" style={{zoom: "1.02", overflow: 'hidden'}}>
+            <div className="card rounded-3 text-black h-100 auth-card">
               <div className="row g-0 h-100">
                 <div className="col-lg-6 d-flex align-items-center">
                   <div className="card-body p-md-5 mx-md-4 w-100">
                     <div className="text-center">
                       
-                      <img src={`${process.env.PUBLIC_URL}/images/img1.png`} alt="Logo" 
-                        style={{ width: '200px', height: '200px' }} 
-                      />
-                      <h4 className="mt-1 mb-5 pb-1">For Booklovers!</h4>
+                      <img src={`${process.env.PUBLIC_URL}/images/img1.png`} alt="Shelflyst logo" className="auth-logo" />
+                      <h4 className="mt-1 mb-4 pb-1">For Booklovers!</h4>
                     </div>
 
                     <form onSubmit={handleSubmit}>
@@ -86,9 +83,9 @@ function Login() {
                         />
                       </div>
 
-                      <div className="text-center pt-1 mb-5 pb-1">
+                      <div className="text-center pt-1 mb-4 pb-1">
                         <button 
-                          className="btn btn-primary btn-block mb-3" 
+                          className="btn btn-primary w-100 mb-3" 
                           type="submit"
                           disabled={loading}
                         >
@@ -97,8 +94,8 @@ function Login() {
                         {/* <a className="text-muted" href="#!">Forgot password?</a> */}
                       </div>
 
-                      <div className="d-flex align-items-center justify-content-center pb-4">
-                        <p className="mb-0 me-2">Don't have an account?</p>
+                      <div className="d-flex flex-wrap align-items-center justify-content-center gap-2 pb-2">
+                        <p className="mb-0">Don't have an account?</p>
                         <button 
                           type="button" 
                           className="btn btn-outline-danger"
@@ -114,7 +111,7 @@ function Login() {
                   </div>
                 </div>
 
-                <div className="col-lg-6 d-flex align-items-center bg-primary">
+                <div className="col-lg-6 d-none d-lg-flex align-items-center bg-primary auth-side">
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                     <h4 className="mb-4">Indulge in the world of books!</h4>
                     <p className="small mb-0">

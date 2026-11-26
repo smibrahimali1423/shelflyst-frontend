@@ -4,6 +4,7 @@ import { fetchBooks, deleteBook } from '../redux/booksThunks';
 import { fetchSharedBooks, shareBookToCommunity } from '../redux/sharedBooksThunks';
 import BookItem from './BookItem';
 import Alert from './Alert';
+import DotPulse from './DotPulse';
 
 function BookItemList() {
   const dispatch = useDispatch();
@@ -79,43 +80,47 @@ function BookItemList() {
   };
 
   if (loading || loadingSharedBooks) {
-    return <p>Loading...</p>;
+    return <div className="container page-container"><DotPulse /></div>;
   }
 
   if (error || sharedBooksError) {
-    return <p>Error: {error || sharedBooksError}</p>;
+    return <div className="container page-container"><p className="text-danger">Error: {error || sharedBooksError}</p></div>;
   }
 
   return (
-    <div className="container pt-5 mt-5">
+    <div className="container page-container">
       {alert && <Alert alert={alert} clearAlert={() => setAlert(null)} />} {/* Show alert */}
 
+      <div className="page-header">
+        <h2 className="page-title">My Shelf</h2>
+        {books.length > 0 && <span className="text-muted small">{books.length} {books.length === 1 ? 'book' : 'books'}</span>}
+      </div>
+
       {books.length === 0 ? (
-        <div className="text-center">
-          <h2>Empty list of books. Browse and add to your collection!</h2>
+        <div className="empty-state">
+          <h4>Your shelf is empty</h4>
+          <p className="text-muted mb-0">Use "Add books" to search and add books to your collection.</p>
         </div>
       ) : (
-        <div className="row">
+        <div className="book-grid">
           {books.map((book) => {
             const isAlreadyShared = sharedBooks.some((sharedBook) => sharedBook.id === book.id);
 
             return (
-              <div key={book._id} className="col-md-3 mb-4">
-                <BookItem
-                  title={book.volumeInfo.title}
-                  authors={Array.isArray(book.volumeInfo.authors) && book.volumeInfo.authors.length > 0
-                    ? book.volumeInfo.authors.join(', ')
-                    : 'Not available'}                  publishedDate={book.volumeInfo.publishedDate}
-                  thumbnail={book.volumeInfo.imageLinks?.thumbnail}
-                  description={book.volumeInfo.description || 'No description available.'}
-                  showAddButton={false}
-                  onAddClick={() => {}}
-                  isAdded={() => {}}
-                  onRemoveClick={() => handleRemoveClick(book._id)}
-                  onShareClick={ () => handleShareClick(book)} // Pass share handler
-                  isShared={isAlreadyShared} // Pass shared state
-                />
-              </div>
+              <BookItem
+                key={book._id}
+                title={book.volumeInfo.title}
+                authors={Array.isArray(book.volumeInfo.authors) && book.volumeInfo.authors.length > 0
+                  ? book.volumeInfo.authors.join(', ')
+                  : 'Not available'}
+                publishedDate={book.volumeInfo.publishedDate}
+                thumbnail={book.volumeInfo.imageLinks?.thumbnail}
+                description={book.volumeInfo.description || 'No description available.'}
+                showAddButton={false}
+                onRemoveClick={() => handleRemoveClick(book._id)}
+                onShareClick={() => handleShareClick(book)}
+                isShared={isAlreadyShared}
+              />
             );
           })}
         </div>

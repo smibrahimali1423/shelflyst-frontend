@@ -1,95 +1,63 @@
-import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import AddBooks from './AddBooks';
 import UserModal from './UserModal';
 
 function Navbar() {
     const navigate = useNavigate();
     const location = useLocation();
+    // The menu is opened and closed with React state, so it works on phones
+    // without relying on Bootstrap's JavaScript (which isn't loaded).
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    // Close the mobile menu whenever the page changes
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [location.pathname]);
 
     const handleAddBooksClick = () => {
         navigate('/booksearch');
     };
 
-    // Determine if the current route matches any of these pages
-    const isHomeDisabled = location.pathname === '/booklist';
-    const isAboutDisabled = location.pathname === '/about';
-    const isSharedBooksDisabled = location.pathname === '/sharedbooks';
-    const isRecommendationsDisabled = location.pathname === '/recommendations';
     const isBookSearchPage = location.pathname === '/booksearch';
+    const linkClass = ({ isActive }) => `nav-link ${isActive ? 'active' : ''}`;
 
     return (
-<nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top px-3" style={{ height: '80px' }}>
-<Link className="navbar-brand d-flex align-items-center" to="/booklist" style={{ fontSize: '26px' }}>
-        <img
-            src="/images/img1.png"
-            alt="Logo"
-            style={{
-                width: '60px',    // Increased width
-                height: '60px',   // Increased height
-                marginRight: '12px',
-                objectFit: 'contain',
-            }}
-        />
-        Shelflyst
-    </Link>
-           <button
+        <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top px-3 app-navbar">
+            <Link className="navbar-brand d-flex align-items-center app-brand" to="/booklist">
+                <img src="/images/img1.png" alt="Shelflyst logo" className="app-brand-logo" />
+                Shelflyst
+            </Link>
+
+            <button
                 className="navbar-toggler"
                 type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
-                aria-expanded="false"
+                aria-expanded={menuOpen}
                 aria-label="Toggle navigation"
+                onClick={() => setMenuOpen((open) => !open)}
             >
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className={`collapse navbar-collapse ${menuOpen ? 'show' : ''}`} id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <Link
-                            className={`nav-link ${isHomeDisabled ? 'disabled' : ''}`}
-                            to="/booklist"
-                            aria-disabled={isHomeDisabled}
-                        >
-                            Home
-                        </Link>
+                        <NavLink className={linkClass} to="/booklist">My Shelf</NavLink>
                     </li>
                     <li className="nav-item">
-                        <Link
-                            className={`nav-link ${isAboutDisabled ? 'disabled' : ''}`}
-                            to="/about"
-                            aria-disabled={isAboutDisabled}
-                        >
-                            About
-                        </Link>
+                        <NavLink className={linkClass} to="/sharedbooks">Shared Books</NavLink>
                     </li>
                     <li className="nav-item">
-                        <Link
-                            className={`nav-link ${isSharedBooksDisabled ? 'disabled' : ''}`}
-                            to="/sharedbooks"
-                            aria-disabled={isSharedBooksDisabled}
-                        >
-                            Shared Books
-                        </Link>
+                        <NavLink className={linkClass} to="/about">About</NavLink>
                     </li>
-                    {/* <li className="nav-item">
-                        <Link
-                            className={`nav-link ${isRecommendationsDisabled ? 'disabled' : ''}`}
-                            to="/recommendations"
-                            aria-disabled={isRecommendationsDisabled}
-                        >
-                            Recommendations
-                        </Link>
-                    </li> */}
                 </ul>
 
-                {/* Conditionally show AddBooks button only outside book search */}
-                {!isBookSearchPage && <AddBooks handleAddBooksClick={handleAddBooksClick} />}
-
-                {/* User modal/profile button */}
-                <UserModal />
+                <div className="d-flex align-items-center gap-3 navbar-actions">
+                    {/* Hide the Add books button on the search page itself */}
+                    {!isBookSearchPage && <AddBooks handleAddBooksClick={handleAddBooksClick} />}
+                    <UserModal />
+                </div>
             </div>
         </nav>
     );

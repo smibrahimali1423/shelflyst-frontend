@@ -27,6 +27,10 @@ const sharedBooksSlice = createSlice({
       state.sharedBooks.push(action.payload);
       state.sharedBookCount = state.sharedBooks.length;
     },
+    removeSharedBook: (state, action) => {
+      state.sharedBooks = state.sharedBooks.filter((book) => book._id !== action.payload);
+      state.sharedBookCount = state.sharedBooks.length;
+    },
     clearSharedBooks: (state) => {
       state.sharedBooks = [];
       state.sharedBookCount = 0;
@@ -39,6 +43,7 @@ export const {
   fetchSharedBooksSuccess, 
   fetchSharedBooksFailure, 
   shareBook, 
+  removeSharedBook,
   clearSharedBooks 
 } = sharedBooksSlice.actions;
 

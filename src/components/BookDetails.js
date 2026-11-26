@@ -21,34 +21,12 @@ function BookDetails() {
  }, []);
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      height: 'calc(100vh - 200px)', 
-      margin: '100px 0', 
-    }}>
-      <div 
-        className="book-image"
-        style={{ 
-          flex: '0 0 50%', 
-          height: '100%', 
-          background: `url(${thumbnail ? thumbnail : '/images/placeholder1.png'}) no-repeat center center`, 
-          backgroundSize: 'contain', 
-          position: 'sticky', 
-          top: '0', 
-          zIndex: 1 
-        }}
+    <div className="details-layout">
+      <div
+        className="book-image details-image"
+        style={{ backgroundImage: `url(${thumbnail ? thumbnail : '/images/placeholder1.png'})` }}
       />
-      <div 
-        className="book-details"
-        style={{ 
-          flex: '1', 
-          overflowY: 'auto', 
-          padding: '20px',
-          backgroundColor: '#fff',
-          height: '100%', 
-          boxSizing: 'border-box',
-        }}
-      >
+      <div className="book-details details-text">
         <h2 className="mb-3">{title}</h2>
         <p className="mb-2"><strong>Author(s):</strong> {Array.isArray(authors) ? authors.join(', ') : 'Not available'}</p>
         <p className="mb-2"><strong>Published Date:</strong> {publishedDate || 'Not available'}</p>

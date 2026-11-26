@@ -42,7 +42,7 @@ function UserModal() {
 
     return (
         <div className="position-relative">
-            <div className="d-flex align-items-center user-info me-4" onClick={togglePopup}>
+            <div className="d-flex align-items-center user-info" onClick={togglePopup}>
                 <i className="fa-solid fa-user me-2"></i>
                 <span className="navbar-text">{userName || 'Loading...'}</span>
             </div>

@@ -11,7 +11,7 @@
 .user-popup {
     position: absolute;
     top: 100%; /* Position directly below the user-info */
-    left: 0; /* Align to the left edge of the user-info */
+    right: 0; /* Align to the right edge so it never runs off the screen */
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

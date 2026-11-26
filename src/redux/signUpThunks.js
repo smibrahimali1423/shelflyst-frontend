@@ -32,6 +32,7 @@ export const signup = (name, email, password) => async (dispatch) => {
             sessionStorage.setItem('userName', userNameFetched.name);
             sessionStorage.setItem('email', userNameFetched.email);
             sessionStorage.setItem('date', userNameFetched.date);
+            sessionStorage.setItem('userId', userNameFetched._id);
           } else {
             dispatch(signupFailure('User name not available'));
           }

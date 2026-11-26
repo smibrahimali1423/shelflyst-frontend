@@ -1,4 +1,4 @@
-import { fetchSharedBooksStart, fetchSharedBooksSuccess, fetchSharedBooksFailure, shareBook, clearSharedBooks } from './sharedBooksSlice';
+import { fetchSharedBooksStart, fetchSharedBooksSuccess, fetchSharedBooksFailure, shareBook, removeSharedBook } from './sharedBooksSlice';
 
 const host = "https://shelflyst-backend-2.onrender.com"  
 
@@ -45,4 +45,25 @@ export const shareBookToCommunity = (book) => async (dispatch) => {
     console.error('Error sharing book:', error);
     alert('Failed to share the book. Please try again.');
   }
+};
+
+// Remove a book you shared from the community list.
+// The backend only allows this for the user who shared it.
+export const unshareBook = (sharedBookId) => async (dispatch) => {
+  const response = await fetch(`${host}/api/bookdetails/deletecommonbook/${sharedBookId}`, {
+    method: 'DELETE',
+    headers: {
+      'auth-token': localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    let message = 'Failed to remove the shared book.';
+    try {
+      const data = await response.json();
+      if (data && data.error) message = data.error;
+    } catch (e) { /* keep the default message */ }
+    throw new Error(message);
+  }
+  dispatch(removeSharedBook(sharedBookId));
 };

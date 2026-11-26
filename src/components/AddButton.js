@@ -9,13 +9,13 @@ function AddButton({ onAddClick, isAdded }) {
     };
 
     return (
-        <div className="card-footer" style={{ background: 'transparent', borderTop: 'none', marginTop: 'auto' }}>
+        <div className="card-footer book-card-footer">
             <button
-                className="btn btn-success btn-block mb-3"
+                className={`btn btn-sm w-100 ${isAdded ? 'btn-outline-success' : 'btn-success'}`}
                 onClick={handleClick}
                 disabled={isAdded}
             >
-                <i className="fas fa-plus-circle"></i> Add
+                <i className={`fas ${isAdded ? 'fa-check' : 'fa-plus-circle'} me-1`}></i> {isAdded ? 'On your shelf' : 'Add'}
             </button>
         </div>
     );

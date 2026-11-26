@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { restoreSession } from './redux/authThunks';
+import DotPulse from './components/DotPulse';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import BookItemList from './components/BookItemList';
@@ -14,7 +16,17 @@ import SharedBooks from './components/SharedBooks';
 
 // ProtectedRoute component to handle authentication
 const ProtectedRoute = ({ element }) => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, authChecked } = useSelector((state) => state.auth);
+
+  // While a saved login is being checked, show a loader instead of bouncing to the login page.
+  if (isAuthenticated && !authChecked) {
+    return (
+      <div className="session-check">
+        <DotPulse />
+        <p className="text-muted small mt-3">Signing you back in...</p>
+      </div>
+    );
+  }
 
   return isAuthenticated ? (
     <>
@@ -27,6 +39,12 @@ const ProtectedRoute = ({ element }) => {
 };
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(restoreSession());
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>

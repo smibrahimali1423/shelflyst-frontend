@@ -4,12 +4,11 @@ function AddBooks({ handleAddBooksClick }) {
     return (
         <button
             type="button"
-            className="btn btn-outline-primary btn-sm d-flex align-items-center me-4"
+            className="btn btn-primary btn-sm d-flex align-items-center add-books-btn"
             onClick={handleAddBooksClick}
-            style={{ fontSize: '0.8rem', height: '2rem', padding: '0.2rem 0.5rem' }} // Adjusted font size, height, and padding
         >
-            <i className="fa-solid fa-book me-1" style={{ fontSize: '0.8rem' }}></i>
-            <span className="d-none d-sm-inline">Add books</span> {/* Hide text on smaller screens if needed */}
+            <i className="fa-solid fa-plus me-1"></i>
+            <span>Add books</span>
         </button>
     );
 }

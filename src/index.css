@@ -111,3 +111,326 @@ p {
   line-height: 1.6;
 }
 
+
+/* ============================================================
+   UI refresh + responsive layout (Nov 2026)
+   ============================================================ */
+:root {
+  --shelf-accent: #1f4e9c;
+  --shelf-accent-soft: #e8eef9;
+  --shelf-border: #e6e8ec;
+}
+
+body {
+  background-color: #f7f8fa;
+}
+
+/* ---------- Navbar ---------- */
+.app-navbar {
+  min-height: 64px;
+  border-bottom: 1px solid var(--shelf-border);
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.05);
+}
+.app-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1b2333 !important;
+}
+.app-brand-logo {
+  width: 42px;
+  height: 42px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+.app-navbar .nav-link {
+  font-weight: 500;
+  color: #4b5563;
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem !important;
+}
+.app-navbar .nav-link:hover {
+  color: var(--shelf-accent);
+}
+.app-navbar .nav-link.active {
+  color: var(--shelf-accent);
+  background-color: var(--shelf-accent-soft);
+}
+.add-books-btn {
+  white-space: nowrap;
+}
+
+/* Mobile menu (below 992px the links live in the toggled panel) */
+@media (max-width: 991.98px) {
+  .app-navbar .navbar-collapse {
+    padding: 0.5rem 0 0.75rem;
+    border-top: 1px solid var(--shelf-border);
+    margin-top: 0.5rem;
+  }
+  .app-navbar .navbar-nav {
+    margin-bottom: 0.5rem !important;
+  }
+  .navbar-actions {
+    justify-content: space-between;
+    padding: 0 0.25rem;
+  }
+  .user-popup {
+    left: auto;
+    right: 0;
+  }
+}
+
+/* ---------- Page layout ---------- */
+.page-container {
+  padding-top: 88px; /* room for the fixed navbar */
+  padding-bottom: 3rem;
+  margin-top: 0 !important;
+  min-height: 100vh;
+}
+.page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+}
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #fff;
+  border: 1px dashed #cfd5df;
+  border-radius: 12px;
+}
+.session-check {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Book grid + cards ---------- */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.book-grid-item {
+  display: flex;
+}
+.book-grid-item > .book-card {
+  width: 100%;
+}
+.book-card {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--shelf-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.book-card:hover {
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.10);
+  transform: translateY(-2px);
+}
+.book-cover-wrap {
+  background: #f1f3f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  padding: 12px;
+}
+.book-cover {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.book-card .card-body {
+  padding: 0.9rem 1rem 0.5rem;
+}
+.book-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.book-meta {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #374151;
+}
+.book-description {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #6b7280;
+}
+.book-card-footer {
+  background: transparent !important;
+  border-top: none !important;
+  margin-top: auto;
+  padding: 0.5rem 1rem 1rem;
+}
+.share-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--shelf-border);
+  background: #fff;
+  color: #0d6efd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+.share-btn:hover:not(:disabled) {
+  background: var(--shelf-accent-soft);
+}
+.share-btn.is-shared,
+.share-btn:disabled {
+  color: #c4c9d1;
+  cursor: not-allowed;
+}
+
+/* ---------- Login / sign-up ---------- */
+.auth-page {
+  min-height: 100vh;
+  background-color: #eef1f5;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+}
+.auth-card {
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+  border: none;
+}
+.auth-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+.auth-side {
+  background: linear-gradient(135deg, #1f4e9c, #2f6fd6) !important;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 575.98px) {
+  .page-container {
+    padding-top: 80px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .page-title {
+    font-size: 1.4rem;
+  }
+  .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .book-cover-wrap {
+    height: 170px;
+    padding: 8px;
+  }
+  .book-card .card-body {
+    padding: 0.6rem 0.7rem 0.4rem;
+  }
+  .book-title {
+    font-size: 0.9rem;
+  }
+  .book-meta,
+  .book-description {
+    font-size: 0.78rem;
+  }
+  /* Keep cards compact on phones: hide the long description */
+  .book-description {
+    display: none;
+  }
+  .book-card-footer {
+    padding: 0.4rem 0.7rem 0.7rem;
+  }
+  .book-card-footer .btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.4rem;
+  }
+  .app-brand {
+    font-size: 1.3rem;
+  }
+  .app-brand-logo {
+    width: 36px;
+    height: 36px;
+  }
+  .auth-page {
+    padding: 1rem 0;
+    align-items: flex-start;
+  }
+  .auth-logo {
+    width: 110px;
+    height: 110px;
+  }
+  .auth-heading {
+    font-size: 1.75rem;
+  }
+}
+
+/* ---------- Book details ---------- */
+.details-layout {
+  display: flex;
+  height: calc(100vh - 200px);
+  margin: 100px 0;
+}
+.details-image {
+  flex: 0 0 50%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.details-text {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #fff;
+  height: 100%;
+  box-sizing: border-box;
+}
+@media (max-width: 767.98px) {
+  /* Stack the cover above the text on phones */
+  .details-layout {
+    flex-direction: column;
+    height: auto;
+    margin: 72px 0 2rem;
+  }
+  .details-image {
+    flex: none;
+    width: 100%;
+    height: 260px;
+    position: static;
+    margin-top: 12px;
+  }
+  .details-text {
+    height: auto;
+    overflow-y: visible;
+    padding: 16px 18px;
+  }
+  .details-text h2 {
+    font-size: 1.4rem;
+  }
+}
